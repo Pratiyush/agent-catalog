@@ -7,7 +7,7 @@ test.describe("Gallery Page", () => {
 
   // ─── Page Load ───
 
-  test("renders all 11 skill cards on initial load", async ({ page }) => {
+  test("renders all 8 skill cards on initial load", async ({ page }) => {
     const cards = page.locator("[data-skill]");
     await expect(cards).toHaveCount(8);
   });
@@ -205,7 +205,7 @@ test.describe("Gallery Page", () => {
   test.describe("Sorting", () => {
     test("sorts by name A-Z by default", async ({ page }) => {
       const firstCard = page.locator("[data-skill]").first();
-      await expect(firstCard).toHaveAttribute("data-skill", "basic-skill");
+      await expect(firstCard).toHaveAttribute("data-skill", "code-quality");
     });
 
     test("sorts by name Z-A", async ({ page }) => {
@@ -217,11 +217,9 @@ test.describe("Gallery Page", () => {
     test("sorts by language", async ({ page }) => {
       await page.selectOption("#sort-select", "lang");
       const cards = page.locator("[data-skill]");
-      // Skills without languages come last (zzz sort)
-      const lastCard = cards.last();
-      const lastName = await lastCard.getAttribute("data-skill");
-      // basic-skill and skill-with-tests have no languages
-      expect(["basic-skill", "skill-with-tests"]).toContain(lastName);
+      // First card should be java (code-quality)
+      const firstCard = cards.first();
+      await expect(firstCard).toHaveAttribute("data-skill", "code-quality");
     });
 
     test("sorts by feature count", async ({ page }) => {
@@ -330,7 +328,7 @@ test.describe("Gallery Page", () => {
       await page.fill("#search", "zzzznonexistent");
       await page.waitForTimeout(300);
       await page.click("#empty-clear");
-      await expect(page.locator("[data-skill]")).toHaveCount(11);
+      await expect(page.locator("[data-skill]")).toHaveCount(8);
       await expect(page.locator("#empty-state")).toBeHidden();
     });
   });
@@ -382,7 +380,7 @@ test.describe("Gallery Page", () => {
 
     test("cards have role=listitem", async ({ page }) => {
       const items = page.locator('[role="listitem"]');
-      await expect(items).toHaveCount(11);
+      await expect(items).toHaveCount(8);
     });
 
     test("gallery stat has aria-live", async ({ page }) => {
@@ -414,8 +412,8 @@ test.describe("Gallery Page", () => {
     });
 
     test("cards show complexity badge", async ({ page }) => {
-      const basic = page.locator('[data-skill="basic-skill"]');
-      await expect(basic.locator(".complexity-badge")).toHaveText("beginner");
+      const hello = page.locator('[data-skill="hello-skill"]');
+      await expect(hello.locator(".complexity-badge")).toHaveText("beginner");
     });
 
     test("cards with compatibility show it", async ({ page }) => {
@@ -425,7 +423,7 @@ test.describe("Gallery Page", () => {
 
     test("cards link to correct GitHub URL", async ({ page }) => {
       const dataVal = page.locator('[data-skill="data-validation"]');
-      await expect(dataVal).toHaveAttribute("href", /examples\/data-validation/);
+      await expect(dataVal).toHaveAttribute("href", /skills\/skill\/data-validation/);
     });
 
     test("cards show spec feature badges", async ({ page }) => {

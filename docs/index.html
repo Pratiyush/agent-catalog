@@ -39,43 +39,167 @@
         <div class="hero-badge">Marketplace for AI Agents</div>
         <h1>SkillsCraft Hub</h1>
         <p class="hero-sub">Browse, install, and contribute production-ready skills for Claude Code, GitHub Copilot, Cursor, OpenAI Codex, and 33+ more agents.</p>
+
+        <!-- Search bar -->
+        <form class="hero-search" action="gallery.html" method="get" role="search" aria-label="Search skills">
+          <svg class="hero-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" name="q" class="hero-search-input" placeholder="Search skills... e.g. release-notes, python, testing" aria-label="Search skills">
+          <button type="submit" class="btn btn-primary btn-sm">Search</button>
+        </form>
+
         <div class="hero-actions">
           <a href="gallery.html" class="btn btn-primary">Browse Skills</a>
           <a href="tutorial.html" class="btn btn-secondary">Tutorial</a>
         </div>
-        <div class="hero-badges">
-          <span style="background:var(--accent-bg);color:var(--accent);padding:4px 12px;border-radius:999px;font-size:0.85rem;font-weight:500;">8 Skills</span>
-          <span style="background:var(--accent-bg);color:var(--accent);padding:4px 12px;border-radius:999px;font-size:0.85rem;font-weight:500;">4 Categories</span>
-          <span style="background:var(--accent-bg);color:var(--accent);padding:4px 12px;border-radius:999px;font-size:0.85rem;font-weight:500;">33+ Agents</span>
+
+        <!-- Stats -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">8</span>
+            <span class="stat-label">Skills</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">5</span>
+            <span class="stat-label">Languages</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">33+</span>
+            <span class="stat-label">Compatible Agents</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <!-- Featured Skills -->
+    <section class="section section-alt">
       <div class="container">
-        <h2 class="section-title">Quick Install</h2>
-        <pre class="code-block"><span class="c-comment"># Install the CLI</span>
-npm install -g @skillscraft/cli
-
-<span class="c-comment"># Browse available skills</span>
-skill list
-
-<span class="c-comment"># Install a skill for your agent</span>
-skill install skills/skill/project-maintenance --target claude
-skill install skills/skill/hello-skill --target copilot
-skill install skills/skill/release-notes --target generic</pre>
+        <h2 class="section-title">Featured Skills</h2>
+        <p class="section-desc">Top skills from the marketplace, ready to install.</p>
+        <div class="card-grid cols-3">
+          <a href="gallery.html?q=project-maintenance" class="card card-link card-featured">
+            <div class="card-featured-icon" style="background:#f5f3ff;color:var(--accent);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <h3>project-maintenance</h3>
+            <p>Enforce PR checklists, track issues, verify release readiness, and audit project state.</p>
+            <div class="card-featured-meta">
+              <span class="tag tag-javascript">JavaScript</span>
+              <span class="complexity-badge" style="background:#f0fdf4;color:var(--green);">Advanced</span>
+            </div>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+          <a href="gallery.html?q=hello-skill" class="card card-link card-featured">
+            <div class="card-featured-icon" style="background:#eff6ff;color:var(--blue);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3>hello-skill</h3>
+            <p>Friendly greetings in multiple languages. The tutorial example covering every spec feature.</p>
+            <div class="card-featured-meta">
+              <span class="tag tag-javascript">JavaScript</span>
+              <span class="complexity-badge" style="background:#eff6ff;color:var(--blue);">Beginner</span>
+            </div>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+          <a href="gallery.html?q=release-notes" class="card card-link card-featured">
+            <div class="card-featured-icon" style="background:#f0fdf4;color:var(--green);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <h3>release-notes</h3>
+            <p>Maintain changelogs and framework phase updates from git history automatically.</p>
+            <div class="card-featured-meta">
+              <span class="tag tag-javascript">JavaScript</span>
+              <span class="complexity-badge" style="background:#fffbeb;color:var(--yellow);">Intermediate</span>
+            </div>
+            <span class="card-arrow">&rarr;</span>
+          </a>
+        </div>
       </div>
     </section>
 
+    <!-- Install Section -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Install</h2>
+        <p class="section-desc">One CLI, every agent. Pick your target and install any skill in seconds.</p>
+        <div class="install-tabs" role="tablist" aria-label="Install commands by agent">
+          <button class="install-tab active" role="tab" aria-selected="true" data-tab="claude">Claude Code</button>
+          <button class="install-tab" role="tab" aria-selected="false" data-tab="copilot">GitHub Copilot</button>
+          <button class="install-tab" role="tab" aria-selected="false" data-tab="codex">OpenAI Codex</button>
+          <button class="install-tab" role="tab" aria-selected="false" data-tab="generic">Generic</button>
+        </div>
+        <div class="install-panels">
+          <div class="install-panel active" id="panel-claude" role="tabpanel">
+            <div class="code-block-wrap">
+              <pre class="code-block" id="code-claude"><span class="c-comment"># Install the CLI</span>
+npm install -g @skillscraft/cli
+
+<span class="c-comment"># Install skills for Claude Code</span>
+skill install project-maintenance --target claude
+skill install hello-skill --target claude
+skill install release-notes --target claude</pre>
+              <button class="copy-btn" data-target="claude" aria-label="Copy to clipboard" title="Copy to clipboard">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="install-panel" id="panel-copilot" role="tabpanel">
+            <div class="code-block-wrap">
+              <pre class="code-block" id="code-copilot"><span class="c-comment"># Install the CLI</span>
+npm install -g @skillscraft/cli
+
+<span class="c-comment"># Install skills for GitHub Copilot</span>
+skill install project-maintenance --target copilot
+skill install hello-skill --target copilot
+skill install release-notes --target copilot</pre>
+              <button class="copy-btn" data-target="copilot" aria-label="Copy to clipboard" title="Copy to clipboard">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="install-panel" id="panel-codex" role="tabpanel">
+            <div class="code-block-wrap">
+              <pre class="code-block" id="code-codex"><span class="c-comment"># Install the CLI</span>
+npm install -g @skillscraft/cli
+
+<span class="c-comment"># Install skills for OpenAI Codex</span>
+skill install project-maintenance --target codex
+skill install hello-skill --target codex
+skill install release-notes --target codex</pre>
+              <button class="copy-btn" data-target="codex" aria-label="Copy to clipboard" title="Copy to clipboard">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="install-panel" id="panel-generic" role="tabpanel">
+            <div class="code-block-wrap">
+              <pre class="code-block" id="code-generic"><span class="c-comment"># Install the CLI</span>
+npm install -g @skillscraft/cli
+
+<span class="c-comment"># Install skills (generic / any agent)</span>
+skill install project-maintenance --target generic
+skill install hello-skill --target generic
+skill install release-notes --target generic</pre>
+              <button class="copy-btn" data-target="generic" aria-label="Copy to clipboard" title="Copy to clipboard">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
     <section class="section section-alt">
       <div class="container">
         <h2 class="section-title">Categories</h2>
-        <p class="section-desc">Four asset types, one marketplace. Skills are the primary category — prompts, agents, and MCP are coming soon.</p>
+        <p class="section-desc">Four asset types, one marketplace. Skills are the primary category -- prompts, agents, and MCP are coming soon.</p>
         <div class="card-grid cols-2">
           <div class="card">
             <h3>Skills</h3>
             <p>SKILL.md instruction sets with scripts, references, and assets. Installable, executable, validated.</p>
-            <span style="color:var(--green);font-weight:600;font-size:0.85rem;">Active — 8 skills</span>
+            <span style="color:var(--green);font-weight:600;font-size:0.85rem;">Active -- 8 skills</span>
           </div>
           <div class="card">
             <h3>Prompts</h3>
@@ -96,6 +220,7 @@ skill install skills/skill/release-notes --target generic</pre>
       </div>
     </section>
 
+    <!-- Submit a skill -->
     <section class="section">
       <div class="container">
         <h2 class="section-title">Submit a Skill</h2>
