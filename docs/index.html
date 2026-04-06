@@ -244,6 +244,7 @@ skill lint my-awesome-skill/SKILL.md
   </footer>
   <script>
     (function() {
+      /* Theme toggle */
       var t = localStorage.getItem('theme');
       if (t) document.documentElement.setAttribute('data-theme', t);
       var btn = document.getElementById('theme-toggle');
@@ -253,6 +254,39 @@ skill lint my-awesome-skill/SKILL.md
         var next = isDark ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
+      });
+
+      /* Install tabs */
+      var tabs = document.querySelectorAll('.install-tab');
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          tabs.forEach(function(t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+          document.querySelectorAll('.install-panel').forEach(function(p) { p.classList.remove('active'); });
+          var panel = document.getElementById('panel-' + tab.getAttribute('data-tab'));
+          if (panel) panel.classList.add('active');
+        });
+      });
+
+      /* Copy to clipboard */
+      var copyTexts = {
+        claude: "npm install -g @skillscraft/cli\nskill install project-maintenance --target claude\nskill install hello-skill --target claude\nskill install release-notes --target claude",
+        copilot: "npm install -g @skillscraft/cli\nskill install project-maintenance --target copilot\nskill install hello-skill --target copilot\nskill install release-notes --target copilot",
+        codex: "npm install -g @skillscraft/cli\nskill install project-maintenance --target codex\nskill install hello-skill --target codex\nskill install release-notes --target codex",
+        generic: "npm install -g @skillscraft/cli\nskill install project-maintenance --target generic\nskill install hello-skill --target generic\nskill install release-notes --target generic"
+      };
+      document.querySelectorAll('.copy-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var target = btn.getAttribute('data-target');
+          var text = copyTexts[target] || '';
+          navigator.clipboard.writeText(text).then(function() {
+            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+            setTimeout(function() {
+              btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+            }, 2000);
+          });
+        });
       });
     })();
   </script>
