@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.turbo/
+playwright-report/
+test-results/
+.skill-package/
+.DS_Store
+*.log
+.env
+.env.*

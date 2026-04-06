@@ -1,0 +1,25 @@
+# Files excluded from deployable skill package
+CODEOWNERS
+CHANGELOG.md
+CHANGELOG
+RELEASE-NOTES.md
+CONTRIBUTING.md
+CONTRIBUTORS.md
+.github/
+.git/
+.gitignore
+node_modules/
+coverage/
+*.log
+*.tsbuildinfo
+.DS_Store
+.turbo/
+.env
+.env.*
+
+# Development-only files
+examples/
+__tests__/
+*.test.*
+*.spec.*
+

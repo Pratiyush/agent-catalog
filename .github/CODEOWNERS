@@ -1,0 +1,9 @@
+# Default owners for the marketplace
+* @Pratiyush
+
+# Skills require review
+skills/ @Pratiyush
+
+# CI and infrastructure
+.github/ @Pratiyush
+scripts/ @Pratiyush

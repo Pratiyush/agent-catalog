@@ -1,0 +1,18 @@
+{
+  "name": "skillscraft-hub",
+  "private": true,
+  "description": "Marketplace for AI Agent Skills, Prompts, Agents, and MCP servers",
+  "scripts": {
+    "validate": "node scripts/validate-skills.mjs",
+    "test:e2e": "pnpm exec playwright test"
+  },
+  "devDependencies": {
+    "@skillscraft/core": "^0.9.0",
+    "@playwright/test": "^1.59.1",
+    "serve": "^14.2.6"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "packageManager": "pnpm@10.8.1"
+}

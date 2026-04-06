@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial: Build a Skill End-to-End — Agentic Skills Framework</title>
+  <meta name="description" content="Step-by-step tutorial building a complete Agent Skill from scratch, covering every spec feature with real CLI commands.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="./" class="nav-brand">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Agentic Skills Framework
+      </a>
+      <nav class="nav-links">
+        <a href="./">Home</a>
+        <a href="concepts.html">Concepts</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="specification.html">Specification</a>
+        <a href="tutorial.html" class="active">Tutorial</a>
+        <a href="https://github.com/Pratiyush/agentic-skills-framework" target="_blank" rel="noopener noreferrer" class="nav-github" aria-label="GitHub repository">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-sm">
+      <div class="container">
+        <h1>Tutorial: Build a Skill End-to-End</h1>
+        <p class="hero-sub">Build <code>hello-skill</code> from zero to installed — covering every spec feature and CLI command.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <!-- TOC -->
+        <nav class="toc">
+          <h4>Steps</h4>
+          <ol>
+            <li><a href="#step-1">Install the CLI</a></li>
+            <li><a href="#step-2">Scaffold with <code>skill init</code></a></li>
+            <li><a href="#step-3">Write the SKILL.md (all frontmatter fields)</a></li>
+            <li><a href="#step-4">Add scripts/</a></li>
+            <li><a href="#step-5">Add references/</a></li>
+            <li><a href="#step-6">Add assets/</a></li>
+            <li><a href="#step-7">Add tests/</a></li>
+            <li><a href="#step-8">Validate with <code>skill validate</code></a></li>
+            <li><a href="#step-9">Lint with <code>skill lint</code></a></li>
+            <li><a href="#step-10">Install with <code>skill install</code></a></li>
+            <li><a href="#step-11">List installed skills</a></li>
+            <li><a href="#step-12">Publish with <code>skill publish</code></a></li>
+            <li><a href="#step-13">Use it programmatically</a></li>
+            <li><a href="#final">Final directory structure</a></li>
+          </ol>
+        </nav>
+
+        <!-- Step 1 -->
+        <section class="doc-section" id="step-1">
+          <h2>Step 1 — Install the CLI</h2>
+          <pre class="code-block"><span class="c-comment"># Install globally</span>
+npm install -g @skillscraft/cli
+
+<span class="c-comment"># Verify</span>
+skill --version
+<span class="c-comment"># 0.9.0</span></pre>
+          <p class="muted">Or use npx: <code>npx @skillscraft/cli validate ...</code></p>
+        </section>
+
+        <!-- Step 2 -->
+        <section class="doc-section" id="step-2">
+          <h2>Step 2 — Scaffold with <code>skill init</code></h2>
+          <pre class="code-block"><span class="c-comment"># Scaffold a new skill (basic template)</span>
+skill init hello-skill
+
+<span class="c-comment"># Or use a template with scripts</span>
+skill init hello-skill --template with-scripts</pre>
+          <p>This creates:</p>
+          <pre class="code-block">hello-skill/
+  SKILL.md          <span class="c-comment"># Frontmatter + body template</span></pre>
+          <p>With the <code>--template with-scripts</code> flag, it also creates a <code>scripts/</code> directory with a starter script.</p>
+        </section>
+
+        <!-- Step 3 -->
+        <section class="doc-section" id="step-3">
+          <h2>Step 3 — Write the SKILL.md (all frontmatter fields)</h2>
+          <p>Replace the generated SKILL.md with a complete example using <strong>every</strong> frontmatter field:</p>
+          <pre class="code-block"><span class="c-comment"># hello-skill/SKILL.md</span>
+---
+<span class="c-kw">name</span>: hello-skill
+<span class="c-kw">description</span>: <span class="c-str">></span>
+  <span class="c-str">Generate friendly greeting messages in multiple languages.</span>
+  <span class="c-str">Use when the user asks for a hello message, welcome text,</span>
+  <span class="c-str">or localized greeting.</span>
+<span class="c-kw">license</span>: MIT
+<span class="c-kw">compatibility</span>: Node.js 22+ or any JavaScript runtime
+<span class="c-kw">metadata</span>:
+  author: your-name
+  version: "1.0"
+  category: utilities
+  tags: greeting localization i18n
+<span class="c-kw">allowed-tools</span>: Bash Read
+---
+
+# Hello Skill
+
+## When to use this skill
+
+Activate when the user wants to:
+- Generate a greeting message in a specific language
+- Create welcome text for an application or document
+- Translate "hello" into multiple languages
+
+## Instructions
+
+1. Ask the user which language they need (or default to English)
+2. Run the greeting script:
+   ```
+   node scripts/greet.js --lang &lt;language-code&gt;
+   ```
+3. If the language is not supported, check `references/LANGUAGES.md`
+   for the full list and suggest the closest match
+4. For custom templates, use the assets in `assets/templates/`
+
+## Output format
+
+The script outputs JSON:
+
+```json
+{
+  "language": "es",
+  "greeting": "Hola, mundo!",
+  "formal": "Buenos dias, estimado usuario."
+}
+```
+
+## Gotchas
+
+- Language codes follow ISO 639-1 (e.g., "en", "es", "ja", "de")
+- The script defaults to English if an unknown code is passed
+- Formal greetings are only available for: en, es, fr, de, ja
+- Keep messages under 200 characters for chat compatibility
+- See `references/LANGUAGES.md` for the complete supported list</pre>
+
+          <h3>Frontmatter field reference</h3>
+          <table>
+            <tr><th>Field</th><th>Required</th><th>Max Length</th><th>Used Above</th></tr>
+            <tr><td><code>name</code></td><td>Yes</td><td>64 chars</td><td><code>hello-skill</code></td></tr>
+            <tr><td><code>description</code></td><td>Yes</td><td>1024 chars</td><td>Multi-line with <code>&gt;</code> (folded scalar)</td></tr>
+            <tr><td><code>license</code></td><td>No</td><td>-</td><td><code>MIT</code></td></tr>
+            <tr><td><code>compatibility</code></td><td>No</td><td>500 chars</td><td><code>Node.js 22+...</code></td></tr>
+            <tr><td><code>metadata</code></td><td>No</td><td>-</td><td>author, version, category, tags</td></tr>
+            <tr><td><code>allowed-tools</code></td><td>No</td><td>-</td><td><code>Bash Read</code></td></tr>
+          </table>
+
+          <div class="callout tip">
+            <strong>Name rules:</strong> Lowercase letters, digits, and hyphens only. Must match <code>^[a-z0-9]([a-z0-9-]*[a-z0-9])?$</code>. The name must match the directory name.
+          </div>
+        </section>
+
+        <!-- Step 4 -->
+        <section class="doc-section" id="step-4">
+          <h2>Step 4 — Add scripts/</h2>
+          <p>Scripts are executable files that agents can run. Create <code>hello-skill/scripts/greet.js</code>:</p>
+          <pre class="code-block"><span class="c-comment">#!/usr/bin/env node</span>
+<span class="c-comment">// hello-skill/scripts/greet.js</span>
+
+<span class="c-kw">const</span> { parseArgs } = require(<span class="c-str">"node:util"</span>);
+
+<span class="c-kw">const</span> GREETINGS = {
+  en: { greeting: <span class="c-str">"Hello, world!"</span>,     formal: <span class="c-str">"Good day, dear user."</span> },
+  es: { greeting: <span class="c-str">"Hola, mundo!"</span>,      formal: <span class="c-str">"Buenos dias, estimado usuario."</span> },
+  fr: { greeting: <span class="c-str">"Bonjour, le monde!"</span>, formal: <span class="c-str">"Bonjour, cher utilisateur."</span> },
+  de: { greeting: <span class="c-str">"Hallo, Welt!"</span>,      formal: <span class="c-str">"Guten Tag, sehr geehrter Benutzer."</span> },
+  ja: { greeting: <span class="c-str">"&#12371;&#12435;&#12395;&#12385;&#12399;&#19990;&#30028;!"</span>,      formal: <span class="c-str">"&#12371;&#12435;&#12395;&#12385;&#12399;&#12289;&#12518;&#12540;&#12470;&#12540;&#27096;&#12290;"</span> },
+};
+
+<span class="c-kw">const</span> { values } = parseArgs({
+  options: { lang: { type: <span class="c-str">"string"</span>, default: <span class="c-str">"en"</span> } },
+});
+
+<span class="c-kw">const</span> lang = values.lang;
+<span class="c-kw">const</span> data = GREETINGS[lang] || GREETINGS.en;
+
+console.log(JSON.stringify({
+  language: lang,
+  greeting: data.greeting,
+  formal: data.formal || null,
+}, null, 2));</pre>
+          <p>Test it directly:</p>
+          <pre class="code-block">node hello-skill/scripts/greet.js --lang es
+<span class="c-comment"># { "language": "es", "greeting": "Hola, mundo!", "formal": "Buenos dias..." }</span></pre>
+        </section>
+
+        <!-- Step 5 -->
+        <section class="doc-section" id="step-5">
+          <h2>Step 5 — Add references/</h2>
+          <p>Reference docs give agents extra context. Create <code>hello-skill/references/LANGUAGES.md</code>:</p>
+          <pre class="code-block"><span class="c-comment"># hello-skill/references/LANGUAGES.md</span>
+
+# Supported Languages
+
+| Code | Language   | Formal Support |
+|------|------------|----------------|
+| en   | English    | Yes            |
+| es   | Spanish    | Yes            |
+| fr   | French     | Yes            |
+| de   | German     | Yes            |
+| ja   | Japanese   | Yes            |
+| zh   | Chinese    | No             |
+| ko   | Korean     | No             |
+| pt   | Portuguese | No             |
+| ar   | Arabic     | No             |
+| hi   | Hindi      | No             |
+
+## Adding a new language
+
+1. Add the ISO 639-1 code and greeting to `scripts/greet.js`
+2. Update this table
+3. Run `skill validate` to verify</pre>
+        </section>
+
+        <!-- Step 6 -->
+        <section class="doc-section" id="step-6">
+          <h2>Step 6 — Add assets/</h2>
+          <p>Assets hold static files agents can use. Create <code>hello-skill/assets/templates/welcome.txt</code>:</p>
+          <pre class="code-block"><span class="c-comment"># hello-skill/assets/templates/welcome.txt</span>
+
+Welcome to {{APP_NAME}}!
+
+We are glad to have you here. If you need help,
+just ask and our assistant will guide you through.
+
+Best regards,
+The {{APP_NAME}} Team</pre>
+          <p>Agents can read this template and substitute <code>{{APP_NAME}}</code> with the project name.</p>
+        </section>
+
+        <!-- Step 7 -->
+        <section class="doc-section" id="step-7">
+          <h2>Step 7 — Add tests/</h2>
+          <p>Test scenarios validate the skill works correctly. Create <code>hello-skill/tests/scenarios.json</code>:</p>
+          <pre class="code-block"><span class="c-comment">// hello-skill/tests/scenarios.json</span>
+[
+  {
+    <span class="c-str">"name"</span>: <span class="c-str">"english-greeting"</span>,
+    <span class="c-str">"input"</span>: <span class="c-str">"Say hello in English"</span>,
+    <span class="c-str">"expectedOutput"</span>: <span class="c-str">"Hello, world!"</span>,
+    <span class="c-str">"tags"</span>: [<span class="c-str">"smoke"</span>, <span class="c-str">"en"</span>]
+  },
+  {
+    <span class="c-str">"name"</span>: <span class="c-str">"spanish-greeting"</span>,
+    <span class="c-str">"input"</span>: <span class="c-str">"Greet me in Spanish"</span>,
+    <span class="c-str">"expectedOutput"</span>: <span class="c-str">"Hola, mundo!"</span>,
+    <span class="c-str">"tags"</span>: [<span class="c-str">"smoke"</span>, <span class="c-str">"es"</span>]
+  },
+  {
+    <span class="c-str">"name"</span>: <span class="c-str">"unknown-language-fallback"</span>,
+    <span class="c-str">"input"</span>: <span class="c-str">"Say hello in Klingon"</span>,
+    <span class="c-str">"expectedOutput"</span>: <span class="c-str">"Hello, world!"</span>,
+    <span class="c-str">"tags"</span>: [<span class="c-str">"edge-case"</span>]
+  },
+  {
+    <span class="c-str">"name"</span>: <span class="c-str">"formal-greeting"</span>,
+    <span class="c-str">"input"</span>: <span class="c-str">"Give me a formal German greeting"</span>,
+    <span class="c-str">"expectedOutput"</span>: <span class="c-str">"Guten Tag, sehr geehrter Benutzer."</span>,
+    <span class="c-str">"tags"</span>: [<span class="c-str">"formal"</span>, <span class="c-str">"de"</span>]
+  }
+]</pre>
+          <p>These follow the <code>TestScenario</code> interface from the <a href="specification.html">extended spec</a>.</p>
+        </section>
+
+        <!-- Step 8 -->
+        <section class="doc-section" id="step-8">
+          <h2>Step 8 — Validate with <code>skill validate</code></h2>
+          <p>Check your skill against the spec:</p>
+          <pre class="code-block"><span class="c-comment"># Validate the skill</span>
+skill validate hello-skill/SKILL.md</pre>
+          <p>Expected output if everything is correct:</p>
+          <pre class="code-block"><span style="color:var(--green)">&#10003; Skill "hello-skill" is valid.</span>
+
+Checked:
+  &#10003; name is present and within 1-64 characters
+  &#10003; name matches regex ^[a-z0-9]([a-z0-9-]*[a-z0-9])?$
+  &#10003; name matches directory name
+  &#10003; description is present and within 1-1024 characters
+  &#10003; compatibility is within 500 characters
+  &#10003; frontmatter contains no unknown fields
+  &#10003; YAML frontmatter is valid</pre>
+          <p>If there are errors:</p>
+          <pre class="code-block"><span style="color:var(--red)">&#10007; Skill has validation errors:</span>
+  - [error] Name "Hello-Skill" does not match pattern ^[a-z0-9]...
+  - [error] Description exceeds maximum length of 1024 characters</pre>
+          <p>Fix all errors before proceeding. Use <code>--strict</code> to also fail on warnings.</p>
+        </section>
+
+        <!-- Step 9 -->
+        <section class="doc-section" id="step-9">
+          <h2>Step 9 — Lint with <code>skill lint</code></h2>
+          <p>Check best practices beyond spec compliance:</p>
+          <pre class="code-block"><span class="c-comment"># Lint for best practices</span>
+skill lint hello-skill/SKILL.md
+
+<span class="c-comment"># With fix suggestions</span>
+skill lint hello-skill/SKILL.md --fix</pre>
+          <p>Expected output for our skill:</p>
+          <pre class="code-block"><span style="color:var(--green)">&#10003; Lint passed — 0 issues found.</span>
+
+Rules checked:
+  &#10003; description-quality     Description starts with action verb or "Use when"
+  &#10003; gotchas-section          Body contains a "Gotchas" section
+  &#10003; body-length              Body is under 500 lines
+  &#10003; frontmatter-completeness Has license, compatibility, and metadata
+  &#10003; allowed-tools-declared   allowed-tools field is present
+  &#10003; description-length       Description is concise (&lt;200 chars recommended)
+  &#10003; name-matches-directory   name matches parent directory name</pre>
+          <p>The linter has 7 rules covering description quality, body length, completeness, and naming.</p>
+        </section>
+
+        <!-- Step 10 -->
+        <section class="doc-section" id="step-10">
+          <h2>Step 10 — Install with <code>skill install</code></h2>
+          <p>Install the skill for a specific agent:</p>
+          <pre class="code-block"><span class="c-comment"># Install for Claude Code</span>
+skill install hello-skill --target claude
+<span class="c-comment"># Installed "hello-skill" for claude (project scope)</span>
+<span class="c-comment">#   Source: /path/to/hello-skill</span>
+<span class="c-comment">#   Target: .claude/skills/hello-skill</span>
+
+<span class="c-comment"># Install for GitHub Copilot</span>
+skill install hello-skill --target copilot
+<span class="c-comment">#   Target: .github/skills/hello-skill</span>
+
+<span class="c-comment"># Install for OpenAI Codex</span>
+skill install hello-skill --target codex
+<span class="c-comment">#   Target: .codex/skills/hello-skill</span>
+
+<span class="c-comment"># Install generically (works with any agent)</span>
+skill install hello-skill --target generic
+<span class="c-comment">#   Target: .agents/skills/hello-skill</span>
+
+<span class="c-comment"># Install to user scope (global)</span>
+skill install hello-skill --target claude --scope user
+<span class="c-comment">#   Target: ~/.claude/skills/hello-skill</span>
+
+<span class="c-comment"># Force overwrite existing installation</span>
+skill install hello-skill --target claude --force</pre>
+
+          <h3>Target paths</h3>
+          <table>
+            <tr><th>Target</th><th>Project Scope</th><th>User Scope</th></tr>
+            <tr><td><code>claude</code></td><td><code>.claude/skills/&lt;name&gt;/</code></td><td><code>~/.claude/skills/&lt;name&gt;/</code></td></tr>
+            <tr><td><code>copilot</code></td><td><code>.github/skills/&lt;name&gt;/</code></td><td>Not supported</td></tr>
+            <tr><td><code>codex</code></td><td><code>.codex/skills/&lt;name&gt;/</code></td><td>Not supported</td></tr>
+            <tr><td><code>generic</code></td><td><code>.agents/skills/&lt;name&gt;/</code></td><td><code>~/.agents/skills/&lt;name&gt;/</code></td></tr>
+          </table>
+        </section>
+
+        <!-- Step 11 -->
+        <section class="doc-section" id="step-11">
+          <h2>Step 11 — List installed skills</h2>
+          <pre class="code-block"><span class="c-comment"># List all installed skills</span>
+skill list
+
+<span class="c-comment"># Filter by target</span>
+skill list --target claude
+
+<span class="c-comment"># Filter by scope</span>
+skill list --target generic --scope user</pre>
+          <p>Example output:</p>
+          <pre class="code-block">claude (project):
+  Path: .claude/skills
+  - hello-skill - Generate friendly greeting messages in multiple languages.
+
+generic (project):
+  Path: .agents/skills
+  - hello-skill - Generate friendly greeting messages in multiple languages.
+
+2 skill(s) found.</pre>
+        </section>
+
+        <!-- Step 12 -->
+        <section class="doc-section" id="step-12">
+          <h2>Step 12 — Publish with <code>skill publish</code></h2>
+          <pre class="code-block"><span class="c-comment"># Preview what would be published</span>
+skill publish hello-skill --dry-run
+
+<span class="c-comment"># Output:</span>
+<span class="c-comment"># Validating skill...</span>
+<span class="c-comment">#   &#10003; Validation passed</span>
+<span class="c-comment">#   &#10003; Lint clean</span>
+<span class="c-comment">#</span>
+<span class="c-comment"># Package contents (6 files, 3.2 KB):</span>
+<span class="c-comment">#   SKILL.md (1.1 KB)</span>
+<span class="c-comment">#   scripts/greet.js (0.8 KB)</span>
+<span class="c-comment">#   references/LANGUAGES.md (0.5 KB)</span>
+<span class="c-comment">#   assets/templates/welcome.txt (0.2 KB)</span>
+<span class="c-comment">#   tests/scenarios.json (0.6 KB)</span>
+<span class="c-comment">#</span>
+<span class="c-comment"># [dry-run] Would publish skill: hello-skill</span>
+
+<span class="c-comment"># Package for real</span>
+skill publish hello-skill --out-dir ./dist
+
+<span class="c-comment"># Then publish to npm:</span>
+<span class="c-comment">#   cd dist/hello-skill && npm publish --access public</span></pre>
+        </section>
+
+        <!-- Step 13 -->
+        <section class="doc-section" id="step-13">
+          <h2>Step 13 — Use it programmatically</h2>
+          <p>The framework is also a TypeScript SDK:</p>
+          <pre class="code-block"><span class="c-comment">// Using @skillscraft/core in your own tooling</span>
+<span class="c-kw">import</span> { parseSkill, validateSkill, lintSkill } <span class="c-kw">from</span> <span class="c-str">"@skillscraft/core"</span>;
+
+<span class="c-comment">// Parse a SKILL.md file</span>
+<span class="c-kw">const</span> skill = <span class="c-kw">await</span> parseSkill(<span class="c-str">"hello-skill/SKILL.md"</span>);
+console.log(skill.frontmatter.name);        <span class="c-comment">// "hello-skill"</span>
+console.log(skill.frontmatter.description);  <span class="c-comment">// "Generate friendly..."</span>
+console.log(skill.frontmatter.license);      <span class="c-comment">// "MIT"</span>
+console.log(skill.frontmatter.metadata);     <span class="c-comment">// { author: "your-name", ... }</span>
+
+<span class="c-comment">// Validate against the spec</span>
+<span class="c-kw">const</span> result = validateSkill(skill);
+console.log(result.valid);    <span class="c-comment">// true</span>
+console.log(result.errors);   <span class="c-comment">// []</span>
+
+<span class="c-comment">// Lint for best practices</span>
+<span class="c-kw">const</span> lint = lintSkill(skill);
+console.log(lint.passed);       <span class="c-comment">// true</span>
+console.log(lint.diagnostics);  <span class="c-comment">// []</span></pre>
+
+          <pre class="code-block"><span class="c-comment">// Using @skillscraft/spec for types and constants</span>
+<span class="c-kw">import</span> <span class="c-kw">type</span> { SkillFrontmatter, ParsedSkill } <span class="c-kw">from</span> <span class="c-str">"@skillscraft/spec"</span>;
+<span class="c-kw">import</span> { SKILL_NAME_REGEX, SPEC_LIMITS } <span class="c-kw">from</span> <span class="c-str">"@skillscraft/spec"</span>;
+
+console.log(SPEC_LIMITS.NAME_MAX_LENGTH);        <span class="c-comment">// 64</span>
+console.log(SPEC_LIMITS.DESCRIPTION_MAX_LENGTH);  <span class="c-comment">// 1024</span>
+console.log(SKILL_NAME_REGEX.test(<span class="c-str">"hello-skill"</span>)); <span class="c-comment">// true</span>
+console.log(SKILL_NAME_REGEX.test(<span class="c-str">"Hello-Skill"</span>)); <span class="c-comment">// false</span></pre>
+        </section>
+
+        <!-- Final structure -->
+        <section class="doc-section" id="final">
+          <h2>Final directory structure</h2>
+          <pre class="code-block">hello-skill/
+  SKILL.md                        <span class="c-comment"># Required — frontmatter + instructions</span>
+  scripts/
+    greet.js                      <span class="c-comment"># Executable script (Node.js)</span>
+  references/
+    LANGUAGES.md                  <span class="c-comment"># Reference doc for agents</span>
+  assets/
+    templates/
+      welcome.txt                 <span class="c-comment"># Static template file</span>
+  tests/
+    scenarios.json                <span class="c-comment"># Test scenarios (extended spec)</span></pre>
+
+          <h3>CLI commands recap</h3>
+          <table>
+            <tr><th>Command</th><th>Purpose</th></tr>
+            <tr><td><code>skill init &lt;name&gt;</code></td><td>Scaffold a new skill</td></tr>
+            <tr><td><code>skill validate &lt;path&gt;</code></td><td>Validate against the spec</td></tr>
+            <tr><td><code>skill lint &lt;path&gt;</code></td><td>Check best practices</td></tr>
+            <tr><td><code>skill install &lt;path&gt;</code></td><td>Install for an agent</td></tr>
+            <tr><td><code>skill list</code></td><td>List installed skills</td></tr>
+            <tr><td><code>skill publish &lt;path&gt;</code></td><td>Package for distribution</td></tr>
+          </table>
+
+          <div class="callout tip">
+            <strong>Next steps:</strong> Browse the <a href="gallery.html">Skill Gallery</a> for more examples, or read the <a href="specification.html">Specification Reference</a> for complete field details and validation rules.
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><a href="https://github.com/Pratiyush/agentic-skills-framework">Agentic Skills Framework</a> &middot; Apache-2.0</p>
+    </div>
+  </footer>
+  <script>
+    (function() {
+      var t = localStorage.getItem('theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.addEventListener('click', function() {
+        var current = document.documentElement.getAttribute('data-theme');
+        var isDark = current === 'dark' || (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        var next = isDark ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    })();
+  </script>
+</body>
+</html>
