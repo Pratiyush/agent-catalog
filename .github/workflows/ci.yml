@@ -7,7 +7,7 @@ on:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 jobs:
-  validate:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -17,5 +17,17 @@ jobs:
           node-version: 22
           cache: "pnpm"
       - run: pnpm install
-      - name: Validate all skills
-        run: node scripts/validate-skills.mjs
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Build distribution
+        run: pnpm build
+
+      - name: Verify dist output
+        run: |
+          test -f dist/index.json
+          test -f dist/.well-known/agent-skills/index.json
+          test -f dist/index.html
+          test -d dist/skills/skill
+          echo "dist/ verified"

@@ -3,9 +3,12 @@
   "private": true,
   "description": "Marketplace for AI Agent Skills, Prompts, Agents, and MCP servers",
   "scripts": {
+    "build": "node scripts/build.mjs",
     "validate": "node scripts/validate-skills.mjs",
     "test": "node --test scripts/validate-skills.test.mjs",
-    "test:e2e": "pnpm exec playwright test"
+    "test:e2e": "pnpm exec playwright test",
+    "serve": "npx serve dist -l 3333",
+    "clean": "rm -rf dist"
   },
   "devDependencies": {
     "@skillscraft/core": "^0.9.0",
