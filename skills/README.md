@@ -4,12 +4,12 @@ Browse and discover AI agent skills organized by category.
 
 ## Categories
 
-| Directory | Description |
-|-----------|-------------|
-| `skill/`  | General-purpose agent skills with scripts, references, and assets |
-| `prompt/` | Prompt templates for common agent tasks |
-| `agent/`  | Agent configuration and orchestration skills |
-| `mcp/`    | MCP (Model Context Protocol) server skills |
+| Directory | Description | Spec |
+|-----------|-------------|------|
+| `skill/`  | General-purpose agent skills with scripts, references, and assets | See [spec repository](https://github.com/Pratiyush/agentic-skills-framework) |
+| `prompt/` | Click-to-copy prompt templates for common agent tasks | [prompt/SPEC.md](./prompt/SPEC.md) |
+| `agent/`  | Pre-configured agent definitions that bundle skills, prompts, and MCP servers | [agent/SPEC.md](./agent/SPEC.md) |
+| `mcp/`    | Model Context Protocol server configurations | [mcp/SPEC.md](./mcp/SPEC.md) |
 
 ## Installing a Skill
 

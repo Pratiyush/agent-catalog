@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pratiyush.github.io/skillscraft-hub/schemas/discovery-index.schema.json",
+  "title": "SkillsCraft Discovery Index",
+  "description": "Cloudflare Agent Skills RFC v0.2.0 compliant discovery index for SkillsCraft Hub.",
+  "type": "object",
+  "required": ["$schema", "name", "description", "generated", "stats", "skills"],
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the schema this document conforms to."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Canonical name of the marketplace/registry."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable description of the marketplace."
+    },
+    "generated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when this index was generated."
+    },
+    "stats": {
+      "type": "object",
+      "required": ["skills"],
+      "additionalProperties": true,
+      "properties": {
+        "skills": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of skills listed."
+        },
+        "categories": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "languages": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "description": "List of skill entries conforming to Cloudflare RFC v0.2.0.",
+      "items": { "$ref": "#/$defs/skillEntry" }
+    }
+  },
+  "$defs": {
+    "skillEntry": {
+      "type": "object",
+      "required": ["name", "type", "description", "url", "digest"],
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
+          "description": "Kebab-case identifier for the skill."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["skill-md", "archive"],
+          "description": "RFC v0.2.0 entry type. 'skill-md' is a single SKILL.md file; 'archive' is a multi-file directory."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Plain-text description (no newlines)."
+        },
+        "url": {
+          "type": "string",
+          "description": "Relative or absolute URL to the artifact. Points to SKILL.md for 'skill-md' or directory for 'archive'."
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "description": "SHA-256 digest of the artifact's raw bytes. Format: 'sha256:<hex>'."
+        },
+        "version": {
+          "type": "string",
+          "description": "Semantic version or free-form version string."
+        },
+        "author": {
+          "type": "string",
+          "description": "Skill author."
+        },
+        "category": {
+          "type": "string",
+          "description": "Category tag."
+        },
+        "license": {
+          "type": ["string", "null"],
+          "description": "SPDX license identifier."
+        },
+        "compatibility": {
+          "type": ["string", "null"],
+          "description": "Compatibility requirements (e.g., 'Requires Node 22+')."
+        },
+        "files": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of files in the skill package."
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total size in bytes."
+        }
+      }
+    }
+  }
+}

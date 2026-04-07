@@ -1,0 +1,9 @@
+dist
+node_modules
+.turbo
+pnpm-lock.yaml
+docs
+test-results
+playwright-report
+skills/skill/code-quality/scripts
+skills/skill/data-validation/scripts

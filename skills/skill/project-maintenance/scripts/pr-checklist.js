@@ -28,7 +28,7 @@ const CONVENTIONAL_PREFIXES = [
 function exec(cmd) {
   try {
     return execSync(cmd, { encoding: "utf-8", stdio: ["pipe", "pipe", "pipe"] }).trim();
-  } catch (e) {
+  } catch (_e) {
     return null;
   }
 }
@@ -228,7 +228,7 @@ function main() {
     passed,
     failed,
     warnings,
-    items: items.map(({ breaking, ...rest }) => rest),
+    items: items.map(({ breaking: _breaking, ...rest }) => rest),
     verdict,
   };
 

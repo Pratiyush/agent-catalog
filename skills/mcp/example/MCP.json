@@ -1,0 +1,13 @@
+{
+  "name": "github-issue-tracker",
+  "description": "MCP server that exposes GitHub issue and PR listing, commenting, and label management over stdio",
+  "command": "node",
+  "args": ["server.js"],
+  "env": {
+    "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+    "GITHUB_OWNER": "${GITHUB_OWNER}",
+    "GITHUB_REPO": "${GITHUB_REPO}"
+  },
+  "transport": "stdio",
+  "license": "MIT"
+}

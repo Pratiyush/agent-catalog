@@ -14,7 +14,7 @@
  * Exits 1 if any CRITICAL or HIGH issue found. Reports MEDIUM/LOW as warnings.
  */
 
-import { readdirSync, readFileSync, existsSync, statSync } from "node:fs";
+import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join, resolve, dirname, relative, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 

@@ -18,6 +18,9 @@ jobs:
           cache: "pnpm"
       - run: pnpm install
 
+      - name: Lint
+        run: pnpm lint
+
       - name: Security scan
         run: pnpm security
 

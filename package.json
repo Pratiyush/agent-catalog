@@ -7,13 +7,22 @@
     "validate": "node scripts/validate-skills.mjs",
     "security": "node scripts/security-scan.mjs",
     "test": "node --test scripts/validate-skills.test.mjs",
-    "test:e2e": "pnpm exec playwright test",
+    "test:e2e": "pnpm build && pnpm exec playwright test",
     "serve": "npx serve dist -l 3333",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "lint": "eslint scripts/ skills/skill/*/scripts/*.{js,mjs,ts}",
+    "format": "prettier --write scripts/ skills/",
+    "format:check": "prettier --check scripts/ skills/"
   },
   "devDependencies": {
-    "@skillscraft/core": "^0.9.0",
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.59.1",
+    "@skillscraft/core": "^0.9.0",
+    "@typescript-eslint/eslint-plugin": "^8.58.0",
+    "@typescript-eslint/parser": "^8.58.0",
+    "eslint": "^10.2.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.1",
     "serve": "^14.2.6"
   },
   "pnpm": {
