@@ -6,12 +6,12 @@ test.describe("Landing Page", () => {
   });
 
   test("loads with correct title", async ({ page }) => {
-    await expect(page).toHaveTitle(/SkillsCraft Hub/);
+    await expect(page).toHaveTitle(/Agent Catalog/);
   });
 
   test("renders hero with brand heading", async ({ page }) => {
     const h1 = page.locator("h1").first();
-    await expect(h1).toHaveText("SkillsCraft Hub");
+    await expect(h1).toHaveText("Agent Catalog");
   });
 
   test("hero search has correct form action and submits to gallery", async ({ page }) => {
@@ -125,6 +125,6 @@ test.describe("Landing Page", () => {
   test("footer link to GitHub repo", async ({ page }) => {
     const footer = page.locator("footer");
     await expect(footer).toBeVisible();
-    await expect(footer.locator('a[href*="skillscraft-hub"]')).toBeVisible();
+    await expect(footer.locator('a[href*="agent-catalog"]')).toBeVisible();
   });
 });

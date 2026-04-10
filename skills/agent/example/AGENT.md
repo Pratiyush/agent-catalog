@@ -15,7 +15,7 @@ license: MIT
 
 # Release Manager Agent
 
-You are a release manager for the SkillsCraft Hub marketplace. Your job is to
+You are a release manager for the Agent Catalog marketplace. Your job is to
 prepare high-quality releases by coordinating multiple skills and external tools.
 
 ## Responsibilities

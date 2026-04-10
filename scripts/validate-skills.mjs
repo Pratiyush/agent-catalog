@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 /**
- * Build-time validation script for SkillsCraft Hub.
+ * Build-time validation script for Agent Catalog.
  * Discovers and validates all SKILL.md files in skills/.
  * Exits with code 1 if any validation errors are found.
  * Lint warnings are reported but don't fail the build.
  */
 
-import { readdirSync, existsSync } from "node:fs";
+import { readdirSync, existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
@@ -46,6 +46,23 @@ function discoverSkills(baseDir) {
   }
 
   return [...new Set(results)];
+}
+
+function discoverPrompts(baseDir) {
+  const promptDir = join(baseDir, "prompt");
+  if (!existsSync(promptDir)) return [];
+  const results = [];
+  const entries = readdirSync(promptDir, { withFileTypes: true });
+
+  for (const entry of entries) {
+    if (!entry.isDirectory() || entry.name === "example") continue;
+    const promptMd = join(promptDir, entry.name, "PROMPT.md");
+    if (existsSync(promptMd)) {
+      results.push(promptMd);
+    }
+  }
+
+  return results;
 }
 
 async function main() {
@@ -91,6 +108,27 @@ async function main() {
     } catch (err) {
       failed++;
       console.log(`  \u2717 ${relPath} — ${err.message}`);
+    }
+  }
+
+  // Validate prompts
+  const promptPaths = discoverPrompts(join(ROOT, "skills"));
+  if (promptPaths.length > 0) {
+    console.log(`\nValidating ${promptPaths.length} prompt(s)...\n`);
+    for (const promptPath of promptPaths) {
+      const relPath = promptPath.slice(ROOT.length + 1);
+      try {
+        const content = readFileSync(promptPath, "utf-8");
+        const fmMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+        if (!fmMatch) throw new Error("No frontmatter");
+        if (!fmMatch[1].includes("name:")) throw new Error("Missing name field");
+        if (!fmMatch[1].includes("description:")) throw new Error("Missing description field");
+        passed++;
+        console.log(`  \u2713 ${relPath}`);
+      } catch (err) {
+        failed++;
+        console.log(`  \u2717 ${relPath} — ${err.message}`);
+      }
     }
   }
 

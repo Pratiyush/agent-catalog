@@ -1,4 +1,4 @@
-// ESLint 9+ flat config for SkillsCraft Hub
+// ESLint 9+ flat config for Agent Catalog
 // Lints JS/TS skill scripts and build tooling. Java/Python skill scripts are
 // excluded via ignores; use their own toolchains (Checkstyle, ruff) instead.
 

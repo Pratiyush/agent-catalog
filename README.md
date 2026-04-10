@@ -1,14 +1,14 @@
-# SkillsCraft Hub
+# Agent Catalog
 
 Marketplace for AI Agent Skills, Prompts, Agents, and MCP servers.
 
-[![CI](https://img.shields.io/github/actions/workflow/status/Pratiyush/skillscraft-hub/ci.yml?style=flat-square&label=CI)](https://github.com/Pratiyush/skillscraft-hub/actions)
-[![Skills](https://img.shields.io/badge/skills-8-7C3AED?style=flat-square)](https://pratiyush.github.io/skillscraft-hub/gallery)
+[![CI](https://img.shields.io/github/actions/workflow/status/Pratiyush/agent-catalog/ci.yml?style=flat-square&label=CI)](https://github.com/Pratiyush/agent-catalog/actions)
+[![Skills](https://img.shields.io/badge/skills-8-7C3AED?style=flat-square)](https://pratiyush.github.io/agent-catalog/gallery)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square)](LICENSE)
 
 ## Browse Skills
 
-Visit the **[Skill Gallery](https://pratiyush.github.io/skillscraft-hub/gallery)** or the **[Tutorial](https://pratiyush.github.io/skillscraft-hub/tutorial)**.
+Visit the **[Skill Gallery](https://pratiyush.github.io/agent-catalog/gallery)** or the **[Tutorial](https://pratiyush.github.io/agent-catalog/tutorial)**.
 
 ## Install a Skill
 

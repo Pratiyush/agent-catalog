@@ -1,4 +1,4 @@
-# SkillsCraft Hub — Marketplace
+# Agent Catalog — Marketplace
 
 Browse and discover AI agent skills organized by category.
 

@@ -44,3 +44,26 @@ describe("Skill directory structure", () => {
     });
   }
 });
+
+// Prompt validation tests
+const PROMPTS_DIR = join(import.meta.dirname, "..", "skills", "prompt");
+
+describe("Prompt directory structure", () => {
+  const promptExampleDir = join(PROMPTS_DIR, "example");
+
+  it("has prompt spec", () => {
+    assert.ok(existsSync(join(PROMPTS_DIR, "SPEC.md")));
+  });
+
+  it("has example prompt with PROMPT.md", () => {
+    assert.ok(existsSync(join(promptExampleDir, "PROMPT.md")));
+  });
+
+  it("example prompt has valid frontmatter", () => {
+    const content = readFileSync(join(promptExampleDir, "PROMPT.md"), "utf-8");
+    const match = content.match(FRONTMATTER_REGEX);
+    assert.ok(match, "No frontmatter found");
+    assert.ok(match[1].includes("name:"), "Missing name field");
+    assert.ok(match[1].includes("description:"), "Missing description field");
+  });
+});

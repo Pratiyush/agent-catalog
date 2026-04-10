@@ -24,7 +24,7 @@ test.describe("Navigation", () => {
     await page.waitForLoadState("domcontentloaded");
     // After clicking href="./" we may land at / or /index.html
     expect(page.url()).toMatch(/\/$|\/index\.html$/);
-    await expect(page.locator("h1").first()).toHaveText("SkillsCraft Hub");
+    await expect(page.locator("h1").first()).toHaveText("Agent Catalog");
   });
 
   test("SDK link is external (target=_blank) on all pages", async ({ page }) => {

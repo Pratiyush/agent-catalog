@@ -21,7 +21,7 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const ROOT = resolve(__dirname, "..");
-const SKILLS_DIR = join(ROOT, "skills", "skill");
+const SKILLS_DIR = join(ROOT, "skills");
 
 // Patterns to scan for. Each: {id, severity, pattern, message, languages?}
 const RULES = [
@@ -206,12 +206,7 @@ function walkAndScan(dir) {
 
 // ── Main ──
 
-console.log("SkillsCraft Hub — Security Scanner\n");
-
-if (!existsSync(SKILLS_DIR)) {
-  console.error(`No skills directory: ${SKILLS_DIR}`);
-  process.exit(1);
-}
+console.log("Agent Catalog — Security Scanner\n");
 
 const results = walkAndScan(SKILLS_DIR);
 

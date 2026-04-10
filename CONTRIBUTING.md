@@ -1,6 +1,6 @@
-# Contributing to SkillsCraft Hub
+# Contributing to Agent Catalog
 
-Thank you for your interest in contributing to the SkillsCraft Hub marketplace! This guide explains how to submit skills, report issues, and improve the project.
+Thank you for your interest in contributing to the Agent Catalog marketplace! This guide explains how to submit skills, report issues, and improve the project.
 
 ## Submitting a Skill
 
@@ -77,7 +77,7 @@ If no `.skillignore` is present, a sensible default set is applied automatically
 
 ## Reporting Issues
 
-- Use the [GitHub Issues](https://github.com/Pratiyush/skillscraft-hub/issues) page
+- Use the [GitHub Issues](https://github.com/Pratiyush/agent-catalog/issues) page
 - For skill submissions, use the "Skill Submission" issue template
 - For bugs, include steps to reproduce
 
