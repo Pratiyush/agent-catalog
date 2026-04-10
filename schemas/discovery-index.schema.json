@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://pratiyush.github.io/skillscraft-hub/schemas/discovery-index.schema.json",
-  "title": "SkillsCraft Discovery Index",
-  "description": "Cloudflare Agent Skills RFC v0.2.0 compliant discovery index for SkillsCraft Hub.",
+  "$id": "https://pratiyush.github.io/agent-catalog/schemas/discovery-index.schema.json",
+  "title": "Agent Catalog Discovery Index",
+  "description": "Cloudflare Agent Skills RFC v0.2.0 compliant discovery index for Agent Catalog.",
   "type": "object",
   "required": ["$schema", "name", "description", "generated", "stats", "skills"],
   "additionalProperties": true,

@@ -1,4 +1,4 @@
-# Project Rules — SkillsCraft Hub
+# Project Rules — Agent Catalog
 
 ## Build & Tooling
 

@@ -18,7 +18,7 @@ test.describe("Gallery Page", () => {
   });
 
   test("has correct page title", async ({ page }) => {
-    await expect(page).toHaveTitle(/Skill Gallery|SkillsCraft Hub/);
+    await expect(page).toHaveTitle(/Skill Gallery|Agent Catalog/);
   });
 
   test("renders hero section with heading", async ({ page }) => {

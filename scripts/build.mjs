@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * build.mjs — SkillsCraft Hub build pipeline.
+ * build.mjs — Agent Catalog build pipeline.
  *
  * Phase 1: Validate + lint each skill using @skillscraft/core
  * Phase 2: Apply .skillignore and copy clean packages to dist/skills/skill/<name>/
@@ -37,7 +37,8 @@ const DOCS_SRC = join(ROOT, "docs");
 const SCHEMAS_SRC = join(ROOT, "schemas");
 
 // Public site URL — used for sitemap.xml, OG tags, and robots.txt
-const SITE_URL = "https://pratiyush.github.io/skillscraft-hub";
+const SITE_URL = "https://pratiyush.github.io/agent-catalog";
+const PROMPTS_SRC = join(ROOT, "skills", "prompt");
 
 const require = createRequire(import.meta.url);
 const core = require("@skillscraft/core");
@@ -252,17 +253,17 @@ skill install ${safeName} --target ${t}</pre>
 
   const copyTextsJson = JSON.stringify(installCommands);
 
-  const githubUrl = `https://github.com/Pratiyush/skillscraft-hub/tree/master/skills/skill/${name}`;
-  const ogUrl = `https://pratiyush.github.io/skillscraft-hub/skills/skill/${name}/`;
+  const githubUrl = `https://github.com/Pratiyush/agent-catalog/tree/master/skills/skill/${name}`;
+  const ogUrl = `https://pratiyush.github.io/agent-catalog/skills/skill/${name}/`;
 
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${safeName} — SkillsCraft Hub</title>
+  <title>${safeName} — Agent Catalog</title>
   <meta name="description" content="${safeDesc}">
-  <meta property="og:title" content="${safeName} — SkillsCraft Hub">
+  <meta property="og:title" content="${safeName} — Agent Catalog">
   <meta property="og:description" content="${safeDesc}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${ogUrl}">
@@ -276,14 +277,14 @@ skill install ${safeName} --target ${t}</pre>
     <div class="nav-inner">
       <a href="../../../" class="nav-brand">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        SkillsCraft Hub
+        Agent Catalog
       </a>
       <nav class="nav-links" aria-label="Main navigation">
         <a href="../../../">Home</a>
         <a href="../../../gallery.html">Gallery</a>
         <a href="../../../tutorial.html">Tutorial</a>
         <a href="https://github.com/Pratiyush/agentic-skills-framework" target="_blank" rel="noopener noreferrer">SDK</a>
-        <a href="https://github.com/Pratiyush/skillscraft-hub" target="_blank" rel="noopener noreferrer" class="nav-github" aria-label="GitHub repository">
+        <a href="https://github.com/Pratiyush/agent-catalog" target="_blank" rel="noopener noreferrer" class="nav-github" aria-label="GitHub repository">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         </a>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
@@ -359,7 +360,7 @@ skill install ${safeName} --target ${t}</pre>
 
   <footer>
     <div class="container">
-      <p><a href="https://github.com/Pratiyush/skillscraft-hub">SkillsCraft Hub</a> &middot; Apache-2.0</p>
+      <p><a href="https://github.com/Pratiyush/agent-catalog">Agent Catalog</a> &middot; Apache-2.0</p>
     </div>
   </footer>
 
@@ -549,35 +550,35 @@ function buildNotFoundHtml() {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>404 — Skill Not Found — SkillsCraft Hub</title>
+  <title>404 — Skill Not Found — Agent Catalog</title>
   <meta name="description" content="The page you're looking for doesn't exist. Browse the gallery or try a search.">
   <meta name="robots" content="noindex">
-  <meta property="og:title" content="404 — Skill Not Found — SkillsCraft Hub">
+  <meta property="og:title" content="404 — Skill Not Found — Agent Catalog">
   <meta property="og:description" content="The page you're looking for doesn't exist. Browse the gallery or try a search.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${SITE_URL}/404.html">
-  <meta property="og:site_name" content="SkillsCraft Hub">
+  <meta property="og:site_name" content="Agent Catalog">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="404 — Skill Not Found — SkillsCraft Hub">
+  <meta name="twitter:title" content="404 — Skill Not Found — Agent Catalog">
   <meta name="twitter:description" content="The page you're looking for doesn't exist.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/skillscraft-hub/style.css">
+  <link rel="stylesheet" href="/agent-catalog/style.css">
 </head>
 <body>
   <header class="nav">
     <div class="nav-inner">
-      <a href="/skillscraft-hub/" class="nav-brand">
+      <a href="/agent-catalog/" class="nav-brand">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        SkillsCraft Hub
+        Agent Catalog
       </a>
       <nav class="nav-links" aria-label="Main navigation">
-        <a href="/skillscraft-hub/">Home</a>
-        <a href="/skillscraft-hub/gallery.html">Gallery</a>
-        <a href="/skillscraft-hub/tutorial.html">Tutorial</a>
+        <a href="/agent-catalog/">Home</a>
+        <a href="/agent-catalog/gallery.html">Gallery</a>
+        <a href="/agent-catalog/tutorial.html">Tutorial</a>
         <a href="https://github.com/Pratiyush/agentic-skills-framework" target="_blank" rel="noopener noreferrer">SDK</a>
-        <a href="https://github.com/Pratiyush/skillscraft-hub" target="_blank" rel="noopener noreferrer" class="nav-github" aria-label="GitHub repository">
+        <a href="https://github.com/Pratiyush/agent-catalog" target="_blank" rel="noopener noreferrer" class="nav-github" aria-label="GitHub repository">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         </a>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
@@ -595,16 +596,16 @@ function buildNotFoundHtml() {
         <h1>404 &mdash; Skill Not Found</h1>
         <p class="hero-sub">The page or skill you&rsquo;re looking for doesn&rsquo;t exist. It may have been renamed, moved, or never existed at all.</p>
 
-        <form class="hero-search" action="/skillscraft-hub/gallery.html" method="get" role="search" aria-label="Search skills">
+        <form class="hero-search" action="/agent-catalog/gallery.html" method="get" role="search" aria-label="Search skills">
           <svg class="hero-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="search" name="q" class="hero-search-input" placeholder="Search skills in the gallery..." aria-label="Search skills">
           <button type="submit" class="btn btn-primary btn-sm">Search</button>
         </form>
 
         <div class="hero-actions">
-          <a href="/skillscraft-hub/" class="btn btn-primary">Home</a>
-          <a href="/skillscraft-hub/gallery.html" class="btn btn-secondary">Browse Gallery</a>
-          <a href="/skillscraft-hub/tutorial.html" class="btn btn-secondary">Tutorial</a>
+          <a href="/agent-catalog/" class="btn btn-primary">Home</a>
+          <a href="/agent-catalog/gallery.html" class="btn btn-secondary">Browse Gallery</a>
+          <a href="/agent-catalog/tutorial.html" class="btn btn-secondary">Tutorial</a>
         </div>
       </div>
     </section>
@@ -612,7 +613,7 @@ function buildNotFoundHtml() {
 
   <footer>
     <div class="container">
-      <p><a href="https://github.com/Pratiyush/skillscraft-hub">SkillsCraft Hub</a> &middot; Apache-2.0 &middot; Powered by <a href="https://github.com/Pratiyush/agentic-skills-framework">@skillscraft</a></p>
+      <p><a href="https://github.com/Pratiyush/agent-catalog">Agent Catalog</a> &middot; Apache-2.0 &middot; Powered by <a href="https://github.com/Pratiyush/agentic-skills-framework">@skillscraft</a></p>
     </div>
   </footer>
   <script>
@@ -634,10 +635,36 @@ function buildNotFoundHtml() {
 `;
 }
 
+/**
+ * Parse and validate a PROMPT.md file.
+ * Prompts have simpler frontmatter: name, description, category, tags, license.
+ */
+function parsePrompt(promptMdPath) {
+  const content = readFileSync(promptMdPath, "utf-8");
+  const fmMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (!fmMatch) throw new Error("No frontmatter found");
+
+  const frontmatter = {};
+  for (const line of fmMatch[1].split("\n")) {
+    const idx = line.indexOf(":");
+    if (idx > 0) {
+      const key = line.slice(0, idx).trim();
+      const val = line.slice(idx + 1).trim();
+      frontmatter[key] = val;
+    }
+  }
+
+  if (!frontmatter.name) throw new Error("Missing required field: name");
+  if (!frontmatter.description) throw new Error("Missing required field: description");
+
+  const body = content.slice(content.indexOf("---", 3) + 3).trim();
+  return { frontmatter, body, filePath: promptMdPath };
+}
+
 // ── Main ──
 
 async function main() {
-  console.log("SkillsCraft Hub — Build Pipeline\n");
+  console.log("Agent Catalog — Build Pipeline\n");
 
   // Clean dist/
   if (existsSync(DIST)) {
@@ -703,6 +730,14 @@ async function main() {
         `  \u2713 ${name}${lintIssues > 0 ? ` (${lintIssues} lint warning(s))` : ""}`
       );
 
+      // Auto-generate .skillignore if missing (CAT-6)
+      const skillIgnorePath = join(skillDir, ".skillignore");
+      if (!existsSync(skillIgnorePath)) {
+        const defaultIgnore = DEFAULT_IGNORE.join("\n") + "\n";
+        writeFileSync(skillIgnorePath, `# Auto-generated by build pipeline\n${defaultIgnore}`);
+        console.log(`    \u2139 Generated default .skillignore`);
+      }
+
       validated.push({
         name,
         skill,
@@ -730,6 +765,55 @@ async function main() {
   }
 
   console.log(`\n${validated.length} skill(s) validated\n`);
+
+  // Phase 1b: Discover and validate prompts
+  const validatedPrompts = [];
+  let promptFailed = 0;
+
+  if (existsSync(PROMPTS_SRC)) {
+    const promptDirs = readdirSync(PROMPTS_SRC, { withFileTypes: true })
+      .filter((d) => d.isDirectory() && d.name !== "example")
+      .map((d) => d.name);
+
+    if (promptDirs.length > 0) {
+      console.log(`Phase 1b: Validate prompts (${promptDirs.length})`);
+
+      for (const name of promptDirs) {
+        const promptDir = join(PROMPTS_SRC, name);
+        const promptMdPath = join(promptDir, "PROMPT.md");
+
+        if (!existsSync(promptMdPath)) {
+          console.log(`  \u2717 ${name} — missing PROMPT.md`);
+          promptFailed++;
+          continue;
+        }
+
+        try {
+          const prompt = parsePrompt(promptMdPath);
+          console.log(`  \u2713 ${name}`);
+          validatedPrompts.push({
+            name,
+            prompt,
+            dir: promptDir,
+            description: prompt.frontmatter.description,
+            category: prompt.frontmatter.category || "general",
+            tags: prompt.frontmatter.tags || "",
+            license: prompt.frontmatter.license || null,
+          });
+        } catch (err) {
+          console.log(`  \u2717 ${name} — ${err.message}`);
+          promptFailed++;
+        }
+      }
+
+      if (promptFailed > 0 && !continueOnError) {
+        console.error(`\n${promptFailed} prompt(s) failed validation. Build aborted.`);
+        process.exit(1);
+      }
+
+      console.log(`\n${validatedPrompts.length} prompt(s) validated\n`);
+    }
+  }
 
   // Phase 2: Build dist packages (apply .skillignore)
   console.log("Phase 2: Build distribution");
@@ -796,19 +880,52 @@ async function main() {
 
   console.log(`\n${validated.length} package(s) built\n`);
 
+  // Phase 2b: Package prompts
+  if (validatedPrompts.length > 0) {
+    console.log("Phase 2b: Package prompts");
+    const distPromptsDir = join(DIST, "skills", "prompt");
+    mkdirSync(distPromptsDir, { recursive: true });
+
+    for (const entry of validatedPrompts) {
+      const destDir = join(distPromptsDir, entry.name);
+      mkdirSync(destDir, { recursive: true });
+      copyFileSync(join(entry.dir, "PROMPT.md"), join(destDir, "PROMPT.md"));
+
+      const digest = sha256(join(destDir, "PROMPT.md"));
+      console.log(`  ${entry.name}: PROMPT.md`);
+
+      indexEntries.push({
+        name: entry.name,
+        type: "prompt",
+        description: entry.description.replace(/\n/g, " ").trim(),
+        url: `skills/prompt/${entry.name}/PROMPT.md`,
+        digest,
+        version: "1.0",
+        author: "agent-catalog",
+        category: entry.category,
+        license: entry.license,
+        files: 1,
+        size: statSync(join(destDir, "PROMPT.md")).size,
+      });
+    }
+
+    console.log(`\n${validatedPrompts.length} prompt(s) packaged\n`);
+  }
+
   // Phase 3: Generate discovery index
   console.log("Phase 3: Generate index");
 
   // Cloudflare RFC v0.2.0-compliant discovery index
   const index = {
-    $schema: "https://pratiyush.github.io/skillscraft-hub/schemas/discovery/v1/schema.json",
-    name: "skillscraft-hub",
+    $schema: "https://pratiyush.github.io/agent-catalog/schemas/discovery/v1/schema.json",
+    name: "agent-catalog",
     description:
-      "Official SkillsCraft marketplace — skills, prompts, agents, MCP",
+      "Agent Catalog — skills, prompts, agents, MCP",
     generated: new Date().toISOString(),
     stats: {
       skills: validated.length,
-      categories: 1,
+      prompts: validatedPrompts.length,
+      categories: validatedPrompts.length > 0 ? 2 : 1,
       languages: [
         ...new Set(
           validated.flatMap((e) => {
