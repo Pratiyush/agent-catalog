@@ -3,7 +3,7 @@
 Marketplace for AI Agent Skills, Prompts, Agents, and MCP servers.
 
 [![CI](https://img.shields.io/github/actions/workflow/status/Pratiyush/agent-catalog/ci.yml?style=flat-square&label=CI)](https://github.com/Pratiyush/agent-catalog/actions)
-[![Skills](https://img.shields.io/badge/skills-8-7C3AED?style=flat-square)](https://pratiyush.github.io/agent-catalog/gallery)
+[![Skills](https://img.shields.io/badge/skills-9-7C3AED?style=flat-square)](https://pratiyush.github.io/agent-catalog/gallery)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square)](LICENSE)
 
 ## Browse Skills
@@ -38,6 +38,7 @@ skill install skills/skill/hello-skill --target generic
 | [code-quality](skills/skill/code-quality) | Java code quality analysis | Java | Intermediate |
 | [test-generator](skills/skill/test-generator) | Generate test stubs from source | TypeScript | Advanced |
 | [dependency-audit](skills/skill/dependency-audit) | Audit dependencies for vulnerabilities | JavaScript | Intermediate |
+| [x-twitter-scraper](skills/skill/x-twitter-scraper) | Use Xquik for X/Twitter data, MCP, webhooks, SDKs, and approved actions | None | Advanced |
 
 ## Categories
 
